@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import MovieItem from "./MovieItem";
+import { useMovieContext } from "../contexts/MovieContext";
 
 function MovieList() {
-  return <div>MovieList</div>;
+  const { getMovies, movies } = useMovieContext();
+  useEffect(() => {
+    getMovies();
+  }, []);
+  return (
+    <div>
+      {movies.map((item) => {
+        return <MovieItem key={item.id} item={item} />;
+      })}
+    </div>
+  );
 }
 
 export default MovieList;
