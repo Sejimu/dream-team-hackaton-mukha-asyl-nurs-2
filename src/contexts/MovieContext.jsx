@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { ACTIONS, API } from "../utils/consts";
+
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import { notiFy } from "../components/Toastify";
+
 
 const movieContext = createContext();
 
@@ -27,7 +29,9 @@ function reducer(state, action) {
 }
 
 function MovieContext({ children }) {
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, init);
+
 
   async function getMovies() {
     try {
@@ -62,14 +66,27 @@ function MovieContext({ children }) {
     } catch (error) {
       // notiFy("Failed to get movies.", "error");
       console.log(error);
+
+  async function addMovie(newMovie) {
+    try {
+      await axios.post(API, newMovie);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+
     }
   }
 
   const value = {
+
     getMovies,
     movies: state.movies,
     deleteMovies,
     getOneMovie,
+
+    
+    addMovie,
+
   };
   return (
     <movieContext.Provider value={value}>{children}</movieContext.Provider>
