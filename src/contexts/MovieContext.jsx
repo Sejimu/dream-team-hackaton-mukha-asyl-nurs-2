@@ -66,7 +66,7 @@ function MovieContext({ children }) {
     } catch (error) {
       // notiFy("Failed to get movies.", "error");
       console.log(error);
-
+    }}
   async function addMovie(newMovie) {
     try {
       await axios.post(API, newMovie);
