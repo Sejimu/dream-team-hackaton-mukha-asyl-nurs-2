@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { ACTIONS } from "../utils/consts";
+import { ACTIONS, API } from "../utils/consts";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const movieContext = createContext();
 
@@ -23,8 +25,22 @@ function reducer(state, action) {
 }
 
 function MovieContext({ children }) {
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, init);
-  const value = { state: state.movies };
+
+  async function addMovie(newMovie) {
+    try {
+      await axios.post(API, newMovie);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const value = {
+    state: state.movies,
+    addMovie,
+  };
   return (
     <movieContext.Provider value={value}>{children}</movieContext.Provider>
   );
