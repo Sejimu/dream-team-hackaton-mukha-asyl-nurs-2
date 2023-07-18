@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { ACTIONS, API } from "../utils/consts";
-
+import { notiFy } from "../components/Toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -39,8 +39,8 @@ function MovieContext({ children }) {
         type: "movies",
         payload: sortedMovies,
       });
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      notiFy(`${e.response.status}: ${e.response.statusText}`, "error");
     }
   }
 
@@ -48,9 +48,9 @@ function MovieContext({ children }) {
     try {
       await axios.delete(`${API}/${id}`);
       getMovies();
-    } catch (error) {
-      // notiFy("Failed to get movies.", "error");
-      console.log(error);
+      notiFy("successful delete");
+    } catch (e) {
+      notiFy(`${e.response.status}: ${e.response.statusText}`, "error");
     }
   }
 
@@ -61,9 +61,8 @@ function MovieContext({ children }) {
         type: "movie",
         payload: data,
       });
-    } catch (error) {
-      // notiFy("Failed to get movies.", "error");
-      console.log(error);
+    } catch (e) {
+      notiFy(`${e.response.status}: ${e.response.statusText}`, "error");
     }
   }
 
@@ -71,8 +70,9 @@ function MovieContext({ children }) {
     try {
       await axios.post(API, newMovie);
       navigate("/");
+      notiFy("successful add");
     } catch (e) {
-      console.log(e);
+      notiFy(`${e.response.status}: ${e.response.statusText}`, "error");
     }
   }
 
@@ -80,8 +80,9 @@ function MovieContext({ children }) {
     try {
       await axios.patch(`${API}/${id}`, newMovie);
       navigate("/");
+      notiFy("successful edit");
     } catch (e) {
-      console.log(e);
+      notiFy(`${e.response.status}: ${e.response.statusText}`, "error");
     }
   }
 

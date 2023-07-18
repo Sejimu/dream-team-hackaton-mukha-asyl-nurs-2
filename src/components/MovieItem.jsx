@@ -26,10 +26,10 @@ const Cart = ({ item }) => {
         <p className="product-description">{item.description}</p>
         <div className="star-rating">{spans}</div>
         <IconButton onClick={() => navigate(`/edit/${item.id}`)}>
-          <EditIcon color="success" />
+          <EditIcon className="edit" />
         </IconButton>
         <IconButton onClick={() => deleteMovies(item.id)}>
-          <DeleteIcon color="error" />
+          <DeleteIcon className="delete" />
         </IconButton>
       </div>
     </div>

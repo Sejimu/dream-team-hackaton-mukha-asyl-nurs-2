@@ -57,3 +57,11 @@ code {
 .star-icon.filled {
   background-color: yellow;
 }
+
+.delete:hover {
+  color: red;
+}
+
+.edit:hover {
+  color: rgb(123, 255, 0);
+}
