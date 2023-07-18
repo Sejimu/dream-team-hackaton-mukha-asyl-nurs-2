@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { ACTIONS } from "../utils/consts";
+import { ACTIONS, API } from "../utils/consts";
+import axios from "axios";
+// import { notiFy } from "../components/Toastify";
 
 const movieContext = createContext();
 
@@ -16,6 +18,8 @@ function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.movies:
       return { ...state, movies: action.payload };
+    case ACTIONS.movie:
+      return { ...state, movie: action.payload };
 
     default:
       return state;
@@ -24,7 +28,49 @@ function reducer(state, action) {
 
 function MovieContext({ children }) {
   const [state, dispatch] = useReducer(reducer, init);
-  const value = { state: state.movies };
+
+  async function getMovies() {
+    try {
+      const { data } = await axios.get(API);
+      dispatch({
+        type: "movies",
+        payload: data,
+      });
+    } catch (error) {
+      // notiFy("Failed to get movies.", "error");
+      console.log(error);
+    }
+  }
+
+  async function deleteMovies(id) {
+    try {
+      await axios.delete(`${API}/${id}`);
+      getMovies();
+    } catch (error) {
+      // notiFy("Failed to get movies.", "error");
+      console.log(error);
+    }
+  }
+
+  async function getOneMovie(id) {
+    try {
+      const { data } = await axios(`${API}/${id}`);
+      dispatch({
+        type: "movie",
+        payload: data,
+      });
+    } catch (error) {
+      // notiFy("Failed to get movies.", "error");
+      console.log(error);
+    }
+  }
+
+  const value = {
+    getMovies,
+    movies: state.movies,
+    deleteMovies,
+    getOneMovie,
+  };
   return (
     <movieContext.Provider value={value}>{children}</movieContext.Provider>
   );

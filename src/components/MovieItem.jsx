@@ -1,7 +1,7 @@
 import React from "react";
 
-function MovieItem() {
+const MovieItem = ({ item }) => {
   return <div>MovieItem</div>;
-}
+};
 
 export default MovieItem;
