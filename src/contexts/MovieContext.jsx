@@ -4,7 +4,6 @@ import { ACTIONS, API } from "../utils/consts";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 const movieContext = createContext();
 
 export function useMovieContext() {
@@ -32,16 +31,15 @@ function MovieContext({ children }) {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, init);
 
-
   async function getMovies() {
     try {
       const { data } = await axios.get(API);
+      const sortedMovies = data.sort((a, b) => b.rating - a.rating);
       dispatch({
         type: "movies",
-        payload: data,
+        payload: sortedMovies,
       });
     } catch (error) {
-      // notiFy("Failed to get movies.", "error");
       console.log(error);
     }
   }
@@ -66,27 +64,34 @@ function MovieContext({ children }) {
     } catch (error) {
       // notiFy("Failed to get movies.", "error");
       console.log(error);
-
+    }
+  }
   async function addMovie(newMovie) {
     try {
       await axios.post(API, newMovie);
       navigate("/");
     } catch (e) {
       console.log(e);
+    }
+  }
 
+  async function editMovie(id, newMovie) {
+    try {
+      await axios.patch(`${API}/${id}`, newMovie);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
     }
   }
 
   const value = {
-
     getMovies,
+    editMovie,
+    getOneMovie,
+    movie: state.movie,
     movies: state.movies,
     deleteMovies,
-    getOneMovie,
-
-    
     addMovie,
-
   };
   return (
     <movieContext.Provider value={value}>{children}</movieContext.Provider>
