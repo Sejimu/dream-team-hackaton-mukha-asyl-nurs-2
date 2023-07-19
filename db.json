@@ -199,26 +199,12 @@
       "Quote3": "“Things we lose have a way of coming back to us in the end, if not always in the way we expect.”"
     },
     {
-<<<<<<< HEAD
       "title": "aasd",
       "description": "dsa",
       "image_url": "dasas",
       "rating": 5,
       "id": 13
     },
-    {
-      "title": "king",
-      "description": "sss",
-      "image_url": "sss",
-      "rating": 1,
-      "id": 14
-=======
-      "title": "aaa",
-      "description": "aa",
-      "image_url": "aaa",
-      "rating": 5,
-      "id": 13
->>>>>>> 51d43371d2c3c7f475c59ffc5e759028509dc15a
-    }
+    
   ]
 }

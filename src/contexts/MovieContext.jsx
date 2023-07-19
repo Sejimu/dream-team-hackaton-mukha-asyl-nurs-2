@@ -39,13 +39,9 @@ function MovieContext({ children }) {
         type: "movies",
         payload: sortedMovies,
       });
-<<<<<<< HEAD
     } catch (e) {
       notiFy(`${e.response.status}: ${e.response.statusText}`, "error");
-=======
-    } catch (error) {
-      console.log(error);
->>>>>>> 51d43371d2c3c7f475c59ffc5e759028509dc15a
+
     }
   }
 
@@ -71,21 +67,14 @@ function MovieContext({ children }) {
     }
   }
 
-    }
-  }
-
-    }}
+   
   async function addMovie(newMovie) {
     try {
       await axios.post(API, newMovie);
       navigate("/");
       notiFy("successful add");
     } catch (e) {
-<<<<<<< HEAD
       notiFy(`${e.response.status}: ${e.response.statusText}`, "error");
-=======
-      console.log(e);
->>>>>>> 51d43371d2c3c7f475c59ffc5e759028509dc15a
     }
   }
 
@@ -93,14 +82,10 @@ function MovieContext({ children }) {
     try {
       await axios.patch(`${API}/${id}`, newMovie);
       navigate("/");
-<<<<<<< HEAD
       notiFy("successful edit");
     } catch (e) {
       notiFy(`${e.response.status}: ${e.response.statusText}`, "error");
-=======
-    } catch (e) {
-      console.log(e);
->>>>>>> 51d43371d2c3c7f475c59ffc5e759028509dc15a
+
     }
   }
 
