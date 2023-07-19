@@ -49,7 +49,6 @@ export default function AddMoviePage() {
       ...formValue,
       [e.target.name]: e.target.value,
     });
-    console.log(formValue);
   }
 
   return (

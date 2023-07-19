@@ -11,27 +11,29 @@ const Cart = ({ item }) => {
   const { deleteMovies } = useMovieContext();
   const spans = [];
   for (let i = 1; i <= item.rating; i++) {
-    spans.push(<StarIcon sx={{ color: "yellow" }} />);
+    spans.push(<StarIcon key={i} sx={{ color: "yellow" }} />);
   }
+  const handleImageError = (e) => {
+    // e.target.src =
+    //   "https://yandex.ru/images/search?text=default+avatar&img_url=https%3A%2F%2Fwww.gowpala.org%2Fassets%2Fuploads%2Ftestimonials%2Fdefault.jpg&pos=1&rpt=simage&stype=image&lr=10309&parent-reqid=1689756382327437-627309941162800036-balancer-l7leveler-kubr-yp-sas-23-BAL-7134&source=serp";
+  };
+
   return (
     <div className="cart">
       <img
-        width={100}
         src={item.image_url}
+        onError={handleImageError}
         alt="Product Image"
-        className="product-image"
       />
-      <div className="product-info">
-        <h2 className="product-title">{item.title}</h2>
-        <p className="product-description">{item.description}</p>
-        <div className="star-rating">{spans}</div>
-        <IconButton onClick={() => navigate(`/edit/${item.id}`)}>
-          <EditIcon color="success" />
-        </IconButton>
-        <IconButton onClick={() => deleteMovies(item.id)}>
-          <DeleteIcon color="error" />
-        </IconButton>
-      </div>
+      <h1>{item.title}</h1>
+      <p>{item.description.slice(0, 80)}...</p>
+      <div className="star-rating">{spans}</div>
+      <IconButton onClick={() => navigate(`/edit/${item.id}`)}>
+        <EditIcon className="edit" />
+      </IconButton>
+      <IconButton onClick={() => deleteMovies(item.id)}>
+        <DeleteIcon className="delete" />
+      </IconButton>
     </div>
   );
 };

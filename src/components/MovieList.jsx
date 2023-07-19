@@ -8,9 +8,9 @@ function MovieList() {
     getMovies();
   }, []);
   return (
-    <div>
-      {movies.map((item) => {
-        return <MovieItem key={item.id} item={item} />;
+    <div className="cartHolder">
+      {movies.map((item, i) => {
+        return <MovieItem key={i} item={item} />;
       })}
     </div>
   );

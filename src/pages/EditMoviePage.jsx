@@ -10,21 +10,17 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useMovieContext } from "../contexts/MovieContext";
 import { useParams } from "react-router-dom";
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function EditMoviePage() {
   const { editMovie, getOneMovie, movie } = useMovieContext();
-  const { addMovie } = useMovieContext();
+  const { id } = useParams();
   const [formValue, setFormValue] = useState({
     title: "",
     description: "",
     image_url: "",
     rating: "",
   });
-
-  const { id } = useParams();
 
   useEffect(() => {
     getOneMovie(id);
@@ -36,7 +32,7 @@ export default function EditMoviePage() {
         title: movie.title,
         description: movie.description,
         image_url: movie.image_url,
-        rating: movie.rating,
+        rating: movie.rating.toString(), // Convert rating to string
       });
     }
   }, [movie]);
@@ -49,7 +45,7 @@ export default function EditMoviePage() {
       !formValue.image_url.trim() ||
       !formValue.rating
     ) {
-      alert("fill all inputs");
+      alert("Please fill in all inputs");
       return;
     }
 
@@ -63,13 +59,12 @@ export default function EditMoviePage() {
     });
   };
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setFormValue({
       ...formValue,
       [e.target.name]: e.target.value,
     });
-    console.log(formValue);
-  }
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -84,7 +79,7 @@ export default function EditMoviePage() {
           }}
         >
           <Typography component="h1" variant="h5">
-            New Movie
+            Edit Movie
           </Typography>
           <Box
             component="form"
@@ -107,7 +102,7 @@ export default function EditMoviePage() {
               required
               fullWidth
               name="description"
-              label="description"
+              label="Description"
               value={formValue.description}
               onChange={handleChange}
             />
@@ -116,32 +111,32 @@ export default function EditMoviePage() {
               required
               fullWidth
               name="image_url"
-              label="image_url"
+              label="Image URL"
               value={formValue.image_url}
               onChange={handleChange}
             />
             <FormControl fullWidth>
-              <InputLabel>rating</InputLabel>
+              <InputLabel>Rating</InputLabel>
               <Select
-                label="rating"
+                label="Rating"
                 name="rating"
                 onChange={handleChange}
                 value={formValue.rating}
               >
                 <MenuItem value={"1"}>1 star</MenuItem>
-                <MenuItem value={"2"}>2 star</MenuItem>
-                <MenuItem value={"3"}>3 star</MenuItem>
-                <MenuItem value={"4"}>4 star</MenuItem>
-                <MenuItem value={"5"}>5 star</MenuItem>
+                <MenuItem value={"2"}>2 stars</MenuItem>
+                <MenuItem value={"3"}>3 stars</MenuItem>
+                <MenuItem value={"4"}>4 stars</MenuItem>
+                <MenuItem value={"5"}>5 stars</MenuItem>
               </Select>
             </FormControl>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "black" }}
             >
-              Add new Movie
+              Save Changes
             </Button>
           </Box>
         </Box>
