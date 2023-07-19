@@ -2,7 +2,7 @@
   "movies": [
     {
       "id": 2,
-      "title": "Harry Potter and the Order of the Phoenix",
+      "title": "Harry Potter",
       "authors": "J.K. Rowling",
       "description": "There is a door at the end of a silent corridor. And it’s haunting Harry Pottter’s dreams. Why else would he be waking in the middle of the night, screaming in terror?Harry has a lot on his mind for this, his fifth year at Hogwarts: a Defense Against the Dark Arts teacher with a personality like poisoned honey; a big surprise on the Gryffindor Quidditch team; and the looming terror of the Ordinary Wizarding Level exams. But all these things pale next to the growing threat of He-Who-Must-Not-Be-Named---a threat that neither the magical government nor the authorities at Hogwarts can stop.As the grasp of darkness tightens, Harry must discover the true depth and strength of his friends, the importance of boundless loyalty, and the shocking price of unbearable sacrifice.His fate depends on them alll.(back cover)",
       "edition": "US Edition",
@@ -20,7 +20,7 @@
     },
     {
       "id": 3,
-      "title": "To Kill a Mockingbird",
+      "title": "To Kill a Mockingbirddd",
       "authors": "Harper Lee",
       "description": "The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it, To Kill A Mockingbird became both an instant bestseller and a critical success when it was first published in 1960. It went on to win the Pulitzer Prize in 1961 and was later made into an Academy Award-winning film, also a classic.Compassionate, dramatic, and deeply moving, To Kill A Mockingbird takes readers to the roots of human behavior - to innocence and experience, kindness and cruelty, love and hatred, humor and pathos. Now with over 18 million copies in print and translated into forty languages, this regional story by a young Alabama woman claims universal appeal. Harper Lee always considered her book to be a simple love story. Today it is regarded as a masterpiece of American literature.",
       "edition": "50th Anniversary",
@@ -197,13 +197,6 @@
       "Quote1": "“Wit beyond measure is man’s greatest treasure.”",
       "Quote2": "“Indifference and neglect often do much more damage than outright dislike.”",
       "Quote3": "“Things we lose have a way of coming back to us in the end, if not always in the way we expect.”"
-    },
-    {
-      "title": "aaa",
-      "description": "aa",
-      "image_url": "aaa",
-      "rating": 5,
-      "id": 13
     }
   ]
 }
