@@ -120,7 +120,7 @@ export default function AddMoviePage() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "black" }}
             >
               Add new Movie
             </Button>
