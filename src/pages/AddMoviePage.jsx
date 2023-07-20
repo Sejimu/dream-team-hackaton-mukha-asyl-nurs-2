@@ -20,6 +20,7 @@ export default function AddMoviePage() {
     description: "",
     image_url: "",
     rating: "",
+    genres: "",
   });
 
   const handleSubmit = (e) => {
@@ -28,7 +29,8 @@ export default function AddMoviePage() {
       !formValue.title.trim() ||
       !formValue.description.trim() ||
       !formValue.image_url.trim() ||
-      !formValue.rating.trim()
+      !formValue.rating.trim() ||
+      !formValue.genres.trim()
     ) {
       alert("fill all inputs");
       return;
@@ -41,6 +43,7 @@ export default function AddMoviePage() {
       description: "",
       image_url: "",
       rating: "",
+      genres: "",
     });
   };
 
@@ -113,6 +116,21 @@ export default function AddMoviePage() {
                 <MenuItem value={"3"}>3 star</MenuItem>
                 <MenuItem value={"4"}>4 star</MenuItem>
                 <MenuItem value={"5"}>5 star</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel>genres</InputLabel>
+              <Select
+                label="genres"
+                name="genres"
+                onChange={handleChange}
+                value={formValue.genres}
+              >
+                <MenuItem value={"Historical"}>Historical</MenuItem>
+                <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
+                <MenuItem value={"Classics"}>Classics</MenuItem>
+                <MenuItem value={"Young Adult"}>Young Adult</MenuItem>
+                <MenuItem value={"Science"}>Science</MenuItem>
               </Select>
             </FormControl>
             <Button

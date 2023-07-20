@@ -27,6 +27,7 @@ const Cart = ({ item }) => {
       />
       <h1>{item.title}</h1>
       <p>{item.description.slice(0, 80)}...</p>
+      <p>{item.genres}</p>
       <div className="star-rating">{spans}</div>
       <IconButton onClick={() => navigate(`/edit/${item.id}`)}>
         <EditIcon className="edit" />
