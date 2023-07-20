@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useReducer } from "react";
-import { ACTIONS, API } from "../utils/consts";
+import React, { createContext, useContext, useReducer, useState } from "react";
+import { ACTIONS, API, LIMIT } from "../utils/consts";
 import { notiFy } from "../components/Toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -13,6 +13,7 @@ export function useMovieContext() {
 const init = {
   movies: [],
   movie: null,
+  totalCount: 1,
 };
 
 function reducer(state, action) {
@@ -21,6 +22,8 @@ function reducer(state, action) {
       return { ...state, movies: action.payload };
     case ACTIONS.movie:
       return { ...state, movie: action.payload };
+    case "totalCount":
+      return { ...state, totalCount: action.payload };
 
     default:
       return state;
@@ -28,16 +31,24 @@ function reducer(state, action) {
 }
 
 function MovieContext({ children }) {
+  const [page, setPage] = React.useState(1);
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, init);
 
   async function getMovies() {
     try {
-      const { data } = await axios.get(API);
+      const { data, headers } = await axios.get(
+        `${API}${window.location.search}`
+      );
+      const totalCounta = Math.ceil(headers["x-total-count"] / LIMIT);
       const sortedMovies = data.sort((a, b) => b.rating - a.rating);
       dispatch({
         type: "movies",
         payload: sortedMovies,
+      });
+      dispatch({
+        type: "totalCount",
+        payload: totalCounta,
       });
     } catch (e) {
       notiFy(`${e.response.status}: ${e.response.statusText}`, "error");
@@ -98,6 +109,9 @@ function MovieContext({ children }) {
     movies: state.movies,
     deleteMovies,
     addMovie,
+    page,
+    setPage,
+    totalCount: state.totalCount,
   };
   return (
     <movieContext.Provider value={value}>{children}</movieContext.Provider>
