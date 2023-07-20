@@ -20,6 +20,7 @@ export default function EditMoviePage() {
     description: "",
     image_url: "",
     rating: "",
+    genres: "",
   });
 
   useEffect(() => {
@@ -32,7 +33,8 @@ export default function EditMoviePage() {
         title: movie.title,
         description: movie.description,
         image_url: movie.image_url,
-        rating: movie.rating.toString(), // Convert rating to string
+        rating: movie.rating, // Convert rating to string
+        genres: movie.genres,
       });
     }
   }, [movie]);
@@ -43,7 +45,8 @@ export default function EditMoviePage() {
       !formValue.title.trim() ||
       !formValue.description.trim() ||
       !formValue.image_url.trim() ||
-      !formValue.rating
+      !formValue.rating ||
+      !formValue.genres
     ) {
       alert("Please fill in all inputs");
       return;
@@ -56,6 +59,7 @@ export default function EditMoviePage() {
       description: "",
       image_url: "",
       rating: "",
+      genres: "",
     });
   };
 
@@ -128,6 +132,21 @@ export default function EditMoviePage() {
                 <MenuItem value={"3"}>3 stars</MenuItem>
                 <MenuItem value={"4"}>4 stars</MenuItem>
                 <MenuItem value={"5"}>5 stars</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel>genres</InputLabel>
+              <Select
+                label="genres"
+                name="genres"
+                onChange={handleChange}
+                value={formValue.genres}
+              >
+                <MenuItem value={"Historical"}>Historical</MenuItem>
+                <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
+                <MenuItem value={"Classics"}>Classics</MenuItem>
+                <MenuItem value={"Young Adult"}>Young Adult</MenuItem>
+                <MenuItem value={"Science"}>Science</MenuItem>
               </Select>
             </FormControl>
             <Button
