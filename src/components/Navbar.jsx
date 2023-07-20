@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink } from "react-router-dom";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-
+import LiveSearch from "./LiveSearch";
 const pages = [
   { title: "movies", link: "/" },
   { title: "addMovies", link: "/add" },
@@ -62,7 +62,6 @@ function ResponsiveAppBar() {
           >
             YouTube
           </Typography>
-
           <Box
             sx={{
               flexGrow: 1,
@@ -109,6 +108,21 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                component={NavLink}
+                to={page.link}
+                key={page.title}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page.title}
+              </Button>
+            ))}
+          </Box>
+          <LiveSearch />
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -128,19 +142,6 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button component={NavLink}
-                to={page.link}
-                key={page.title}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page.title}
-              </Button>
-            ))}
-          </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -178,4 +179,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;
